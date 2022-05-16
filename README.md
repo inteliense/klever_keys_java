@@ -28,7 +28,7 @@ cmake ../
 cmake --build .
 ```
 
-<b>You need to do the same process one more time after uncommenting the last `add_jar` line</b>
+<b>You need to do the same process one more time after uncommenting the last `add_jar` line in CMakeLists.txt</b>
 
 You can then add the generated .jar file into a module.
 
