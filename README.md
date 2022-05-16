@@ -8,7 +8,7 @@ Use the Java application (.jar file) included to create a new class and header f
 
 Execute the jar by executing the following command in the terminal or command prompt (Windows, Linux, and macOS):
 
-java -jar kleverkeys-generator.jar
+`java -jar kleverkeys-generator.jar`
 
 Then follow the prompts (# of keys & ivs, class name, and path) to create the 3 files automatically.
 
