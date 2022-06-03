@@ -1,8 +1,11 @@
 package com.inteliense.kleverkeys;
 
-import java.io.*;
-import java.net.URL;
-import java.util.Locale;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
+import java.util.Random;
 
 public class KleverKeys {
 
@@ -14,7 +17,11 @@ public class KleverKeys {
 
     static {
         try {
-            System.load(copyFile());
+            String filepath = copyFile();
+            System.load(filepath);
+            File f = new File(filepath);
+            f.delete();
+
         } catch (Exception e) {
             e.printStackTrace();
             throw new UnsatisfiedLinkError("Couldn't load the klever_keys library.");
@@ -52,13 +59,29 @@ public class KleverKeys {
 
         try {
 
-            return ExportResource("tmpfile.dylib", "klever_keys.dylib");
+            return ExportResource(generateStr() + ".so", "klever_keys.so");
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
         return null;
+
+    }
+
+    private static String generateStr() {
+        int leftLimit = 48; // numeral '0'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+
+        String generatedString = random.ints(leftLimit, rightLimit + 1)
+                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+
+        return generatedString;
 
     }
 
